@@ -8,7 +8,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mailChimp.setConfig({
-    apiKey: "bcb565cf575433a4d3ad7c31746b5449-us18",
+    apiKey: "eb5d599f44dce8712a05a8b3057b1228-us18",
     server: "us18"
 });
 
@@ -28,6 +28,7 @@ app.get("/", function (req, res) {
                 LNAME: pwd
             }
         });
+        console.log(response);
         res.sendFile(__dirname + "/result.html");
     });
 });
