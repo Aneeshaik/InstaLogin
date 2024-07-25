@@ -1,5 +1,7 @@
 const express = require("express");
 const path = require('path');
+const dotEnv = require('dotenv');
+dotEnv.config();
 const bodyParser = require("body-parser");
 const mailChimp = require("@mailchimp/mailchimp_marketing");
 
@@ -9,13 +11,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mailChimp.setConfig({
-    apiKey: "eb5d599f44dce8712a05a8b3057b1228-us18",
+    apiKey: process.env.API_KEY,
     server: "us18"
 });
+console.log(process.env.API_KEY);
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html")
-    var email = req.body.email;
 
     app.post("/", function (req, res) {
         var user = req.body.username;
