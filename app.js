@@ -1,41 +1,39 @@
 const express = require("express");
-const path = require('path');
-const dotEnv = require('dotenv');
-dotEnv.config();
 const bodyParser = require("body-parser");
+const path = require("path");
+require("dotenv").config();
 const mailChimp = require("@mailchimp/mailchimp_marketing");
-
 const app = express();
-
-app.use(express.static(path.join(__dirname, 'public')))
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: true }));
 
 mailChimp.setConfig({
     apiKey: process.env.API_KEY,
-    server: "us18"
+    server: process.env.SERVER
 });
-console.log(process.env.API_KEY);
 
 app.get("/", function (req, res) {
     res.sendFile(__dirname + "/index.html")
-
+    var email = req.body.email;
     app.post("/", function (req, res) {
         var user = req.body.username;
         var pwd = req.body.password;
         var email = req.body.email;
-        const response = mailChimp.lists.addListMember("14d988a883", {
+        mailChimp.lists.addListMember("14d988a883", {
             email_address: email,
             status: "subscribed",
             merge_fields: {
                 FNAME: user,
                 LNAME: pwd
             }
-        });
-        console.log(response);
+        })
+        //then will take function 
+        .then((response) => {   // I was getting promsie {Pending} when doing console.log(response). So, I treid then and it worked. If you don't want to log then it'll work without then also
+            // console.log(response);
+        })
         res.sendFile(__dirname + "/result.html");
     });
 });
-
 
 app.listen(3000, function () {
     console.log("Valar Morghulis");
