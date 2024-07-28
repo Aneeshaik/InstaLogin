@@ -19,6 +19,9 @@ app.get("/", function (req, res) {
         var user = req.body.username;
         var pwd = req.body.password;
         var email = req.body.email;
+        console.log("Received data:", { user, pwd, email });
+
+    try {
         mailChimp.lists.addListMember("14d988a883", {
             email_address: email,
             status: "subscribed",
@@ -26,11 +29,22 @@ app.get("/", function (req, res) {
                 FNAME: user,
                 LNAME: pwd
             }
-        })
+        }).then((response) => {   // I was getting promsie {Pending} when doing console.log(response). So, I treid then and it worked. If you don't want to log then it'll work without then also
+            console.log("Mailchimp response:", response);
+        });
+
+        // console.log("Mailchimp response:", response);
+        console.log("API Key used:", process.env.API_KEY);
+
+        res.sendFile(__dirname + "/result.html");
+    } catch (error) {
+        console.error("Error adding member to Mailchimp:", error);
+        res.status(500).send("Error adding member to Mailchimp");
+    }
         //then will take function 
-        .then((response) => {   // I was getting promsie {Pending} when doing console.log(response). So, I treid then and it worked. If you don't want to log then it'll work without then also
-            // console.log(response);
-        })
+        // .then((response) => {   // I was getting promsie {Pending} when doing console.log(response). So, I treid then and it worked. If you don't want to log then it'll work without then also
+        //     console.log(response);
+        // })
         console.log(process.env.API_KEY);
         res.sendFile(__dirname + "/result.html");
     });
