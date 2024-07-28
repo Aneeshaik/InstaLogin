@@ -31,8 +31,8 @@ app.get("/", function (req, res) {
                 }
             });
     
-            console.log("Mailchimp response:", response);
-            console.log("API Key used:", process.env.API_KEY);
+            // console.log("Mailchimp response:", response);
+            // console.log("API Key used:", process.env.API_KEY);
     
             res.sendFile(__dirname + "/result.html");
         } catch (error) {
