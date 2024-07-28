@@ -31,10 +31,11 @@ app.get("/", function (req, res) {
             }
         }).then((response) => {   // I was getting promsie {Pending} when doing console.log(response). So, I treid then and it worked. If you don't want to log then it'll work without then also
             console.log("Mailchimp response:", response);
+            console.log("API Key used:", process.env.API_KEY);
         });
 
         // console.log("Mailchimp response:", response);
-        console.log("API Key used:", process.env.API_KEY);
+        
 
         res.sendFile(__dirname + "/result.html");
     } catch (error) {
