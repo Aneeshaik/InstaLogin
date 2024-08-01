@@ -21,7 +21,8 @@ npm install
 __3. Configure Mailchimp__
 * Sign up for a Mailchimp account if you don't already have one.
 * Create an API key in Mailchimp and configure it in the project (usually in an .env file for security).
-* Ensure you handle user data in compliance with Mailchimp's policies and guidelines.  
+* Ensure you handle user data in compliance with Mailchimp's policies and guidelines.<br>
+
 __4. Run the application__
 ```bash
 npm start
