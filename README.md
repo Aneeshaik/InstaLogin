@@ -9,20 +9,20 @@ This project is a clone of the Instagram login functionality, designed for educa
 * **Mailchimp API:** For securely managing user credentials and other related data.
 * **HTML/CSS:** For structuring and styling the web page.
 ## Setup and Installation
-1. Clone the repository
+__1. Clone the repository__
 ```bash
 git clone [repository URL]
 cd [project-folder]
 ```
-2. Install dependencies
+__2. Install dependencies__
 ```bash
 npm install
 ```
-3. Configure Mailchimp:
+__3. Configure Mailchimp__
 * Sign up for a Mailchimp account if you don't already have one.
 * Create an API key in Mailchimp and configure it in the project (usually in an .env file for security).
 * Ensure you handle user data in compliance with Mailchimp's policies and guidelines.
-4. Run the application
+__4. Run the application__
 ```bash
 npm start
 ```
